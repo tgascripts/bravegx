@@ -1,137 +1,112 @@
-/* Stylize search box dropdowns */
-.SpeedDialView-SearchField .OmniDropdown,
-.sdwrapper .SearchField nav.menu {
-  top: 33px;
-  margin-top: 1px;
-  backdrop-filter: var(--backgroundBlur);
-  background-color: var(--colorBgAlphaBlur);
-  border-radius: 0 0 var(--radiusCap) var(--radiusCap);
+body[data-browser="brave"] .brave-startpage {
+  padding: 32px clamp(24px, 6vw, 72px);
+  display: grid;
+  gap: 28px;
 }
-.SpeedDialView-SearchField.SearchField nav.menu > ul {
-  background-color: unset;
+
+body[data-browser="brave"] .brave-startpage .startpage-search {
+  position: relative;
+  max-width: 640px;
+  margin-inline: auto;
+  background: color-mix(in srgb, var(--colorAccentBg) 70%, transparent);
+  border-radius: var(--braveGXCornerRadius);
+  border: 1px solid var(--braveGXBorderColor);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-/* When unfocused search should blend in with background */
-.sdwrapper .SpeedDialView-SearchField.SearchField {
-  background-color: unset;
-  border-radius: unset;
-  backdrop-filter: unset;
-  box-shadow: unset;
+
+body[data-browser="brave"] .brave-startpage .startpage-search input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: var(--colorImageCenterFg, var(--colorFgIntense));
+  font-size: 16px;
 }
-/* Change search text color to be visible on background */
-.sdwrapper .SpeedDialView-SearchField.SearchField {
-  color: var(--colorImageCenterFg);
+
+body[data-browser="brave"] .brave-startpage .startpage-search input:focus {
+  outline: none;
 }
-/* Give the search input a background that doesn't interfere with the dropdown style */
-/* https://stackoverflow.com/a/76207141 */
-.sdwrapper .SpeedDialView-SearchField.SearchField:focus-within::before {
+
+body[data-browser="brave"] .brave-startpage .startpage-search::after {
   content: "";
   position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  backdrop-filter: var(--backgroundBlur);
-  background-color: var(--GXspeedDialSearchBgColor);
-  border-radius: var(--radius);
-  z-index: -1;
-}
-/* Remove default focus indication */
-.sdwrapper .SpeedDialView-SearchField.SearchField:focus-within {
-  box-shadow: unset;
-  outline: unset;
-}
-/* Add bar under search field that animates on focus */
-.SpeedDialView-SearchField .SearchEngineSelect-Icon::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 30px;
+  inset-inline-start: 16px;
+  inset-inline-end: 16px;
+  inset-block-end: 0;
   height: 2px;
-  width: calc(100% - 30px);
-  background-color: var(--GXborderColor);
-  opacity: 0.4;
-}
-.SpeedDialView-SearchField .SearchEngineSelect-Icon::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 30px;
-  height: 2px;
-  width: 0;
-  background-color: var(--GXborderColor);
-  transition: 0.3s ease-out;
-}
-.SpeedDialView-SearchField:focus-within .SearchEngineSelect-Icon::after {
-  width: calc(100% - 30px);
-}
-/* When the dropdown is present, make the bar extend the full width */
-.SpeedDialView-SearchField:has(.OmniDropdown) .SearchEngineSelect-Icon::after,
-.SpeedDialView-SearchField:has(nav.menu) .SearchEngineSelect-Icon::after {
-  left: 0;
-  width: 100%;
-}
-.sdwrapper .SpeedDialView-SearchField.SearchField:has(.OmniDropdown):focus-within::before,
-.sdwrapper .SpeedDialView-SearchField.SearchField:has(nav.menu):focus-within::before {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-radius: 999px;
+  background: linear-gradient(to right, transparent, var(--braveGXBorderColor), transparent);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.25s ease-out;
 }
 
-/* Stylize starpage navigation buttons */
-.startpage-navigation .button-toolbar button {
-  padding-right: 6px;
-}
-/* Hide fade on right of buttons */
-.button-startpage {
-  -webkit-mask-image: unset;
-}
-.button-startpage.button-toolbar {
-  padding-right: 3px;
-}
-.startpage .button-toolbar > button:hover {
-  background-color: unset !important;
-}
-.startpage .startpage-navigation .startpage-navigation-group .button-startpage:hover {
-  border-bottom: 2px solid var(--GXbuttonFill);
+body[data-browser="brave"] .brave-startpage .startpage-search:focus-within::after {
+  transform: scaleX(1);
 }
 
-.speeddial .dial {
-  box-shadow: unset;
+body[data-browser="brave"] .brave-startpage .startpage-dials {
+  display: grid;
+  gap: 20px;
 }
 
-/* Cut dial corners */
-.dials.speeddial div.dial {
-  --modClipPath1: 12%;
-  --modClipPath2: 88%;
-  clip-path: polygon(var(--modClipPath1) 0, 100% 0, 100% var(--modClipPath2), var(--modClipPath2) 100%, 0 100%, 0 var(--modClipPath1));
+body[data-browser="brave"] .brave-startpage .startpage-dials .dial-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
 }
-/* Give consistent border along cut corners */
-.dials.speeddial div.dial.folder .Mini-Thumbnail:first-of-type {
-  clip-path: polygon(22.3% 0, 100% 0, 100% 100%, 0 100%, 0 28%);
+
+body[data-browser="brave"] .brave-startpage .dial {
+  position: relative;
+  border-radius: var(--braveGXCornerRadius);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--colorAccentBg) 48%, transparent);
+  border: 1px solid color-mix(in srgb, var(--braveGXBorderColor) 55%, transparent);
+  min-height: 140px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  transition: transform 0.2s ease-out, border-color 0.2s ease-out;
 }
-.dials.speeddial div.dial .thumbnail-title {
-  clip-path: polygon(0 0, 100% 0, 100% 0%, 79% 100%, 0 100%);
+
+body[data-browser="brave"] .brave-startpage .dial:hover {
+  transform: translateY(-4px);
+  border-color: var(--braveGXBorderColor);
 }
-/* Prevent title from going into cut area */
-.dials.speeddial div.dial .thumbnail-title button {
-  padding-right: 14px;
+
+body[data-browser="brave"] .brave-startpage .dial .dial-preview {
+  padding: 24px;
+  display: grid;
+  place-items: center;
 }
-/* Fill top left corner for focus indicator */
-.dials.speeddial .dial:focus-visible::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(135deg, var(--colorHighlightBg) 9.6%, transparent 0);
-  pointer-events: none;
-}
-/* Folder needs border for bottom right cut corner */
-.dials.speeddial .dial:focus-visible::before {
-  background-image: linear-gradient(135deg, var(--colorHighlightBg) 9.6%, transparent 0, transparent 93.5%, var(--colorHighlightBg) 0);
-}
-.dials .dial .button-title {
+
+body[data-browser="brave"] .brave-startpage .dial .dial-title {
+  padding: 10px 14px 12px;
+  font-weight: 500;
   color: var(--colorFgIntense);
 }
-.dials .dial:focus-within .editable-title-container .button-title {
-  color: var(--colorFgIntense) !important;
+
+body[data-browser="brave"] .brave-startpage .dial:focus-visible {
+  outline: 2px solid var(--colorHighlightBg);
+  outline-offset: 4px;
+}
+
+body[data-browser="brave"] .brave-startpage .startpage-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+
+body[data-browser="brave"] .brave-startpage .startpage-nav button {
+  padding: 8px 16px;
+  border-radius: var(--braveGXCornerRadiusTight);
+  background: transparent;
+  border: none;
+  color: var(--braveGXButtonFill);
+}
+
+body[data-browser="brave"] .brave-startpage .startpage-nav button:hover {
+  background: var(--braveGXButtonBgHover);
 }

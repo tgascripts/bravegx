@@ -1,4 +1,4 @@
 /* Credits: Github user Phosphorus-M */
-.OmniLinkItem-Favicon > * {
-  border-radius: 100% !important;
+body[data-browser="brave"] .brave-address-bar .omnibox-dropdown .omnibox-row .result-icon > * {
+  border-radius: 50% !important;
 }

@@ -1,63 +1,65 @@
-/* 
-.quick-command-container .qc-entry,
-.quick-command-container .quick-commands {
-  background-color: var(--colorAccentBgFadedMore);
-} */
-
-/* Give the window a border and give the header a gradient background */
-#modal-bg.qc-modal .modal-wrapper {
-  border: 1px solid var(--GXborderColor);
-  background-image: linear-gradient(45deg, var(--colorHighlightBg), transparent);
+body[data-browser="brave"] .brave-command-palette {
+  width: clamp(520px, 60vw, 960px);
+  border-radius: var(--braveGXCornerRadius);
+  border: 1px solid var(--braveGXBorderColor);
+  background: color-mix(in srgb, var(--colorAccentBg) 80%, transparent);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
 }
 
-/* Hide separator between header and results */
-.qc-entry > input {
-  border-bottom: none !important;
+body[data-browser="brave"] .brave-command-palette header {
+  padding: 18px 20px 12px;
+  border-bottom: 1px solid color-mix(in srgb, var(--braveGXBorderColor) 65%, transparent);
 }
 
-/* Set the font color for the results */
-.quick-command-container .quick-commands .quick-command .quick-command-title {
+body[data-browser="brave"] .brave-command-palette header input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: var(--braveGXCornerRadiusTight);
+  background: color-mix(in srgb, var(--colorAccentBg) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--braveGXBorderColor) 55%, transparent);
+  color: var(--colorAccentFg);
+}
+
+body[data-browser="brave"] .brave-command-palette header input:focus {
+  outline: 2px solid color-mix(in srgb, var(--colorHighlightBg) 40%, transparent);
+}
+
+body[data-browser="brave"] .brave-command-palette .command-results {
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+body[data-browser="brave"] .brave-command-palette .command-results li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 32px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 20px;
   color: var(--colorFgFadedMost);
 }
-.quick-command-container .quick-commands .quick-command[data-selected] .quick-command-title {
-  color: var(--colorFg);
-  font-weight: 500;
-}
-.isblurred .quick-command-container .quick-commands .quick-command[data-selected] .quick-command-title {
-  color: var(--colorFg);
-}
 
-/* Remove extra corner rounding */
-.quick-command-container input {
-  border-radius: unset;
-}
-
-/* Give favicon or results a background when hovered/selected */
-.quick-command[data-selected] img + span::before {
-  content: "";
-  position: absolute;
-  left: 32px;
-  top: 2px;
-  height: 24px;
+body[data-browser="brave"] .brave-command-palette .command-results li .command-icon {
   width: 24px;
-  background-color: var(--colorAccentBgFadedMore);
-  border-radius: 100%;
-  z-index: 0;
-}
-img.quick-command-favicon {
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--colorAccentBg) 50%, transparent);
   z-index: 1;
 }
 
-/* Make the window wider */
-.quick-command-container,
-.quick-commands > div {
-  width: 50vw !important;
-}
-.quick-commands > div > div {
-  max-width: 50vw !important;
+body[data-browser="brave"] .brave-command-palette .command-results li[data-selected="true"] {
+  background: var(--colorHighlightBgAlpha);
+  color: var(--colorFg);
 }
 
-/* Set the result's background color for hovered/selected */
-.quick-command-container .quick-commands .quick-command[data-selected] {
-  background-color: var(--colorHighlightBgAlpha) !important;
+body[data-browser="brave"] .brave-command-palette .command-results li[data-selected="true"] .command-icon {
+  background: color-mix(in srgb, var(--colorHighlightBg) 40%, transparent);
+}
+
+body[data-browser="brave"] .brave-command-palette .command-results li .command-shortcut {
+  font-size: 12px;
+  color: var(--colorFgFadedMost);
 }

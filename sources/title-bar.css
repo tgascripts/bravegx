@@ -1,37 +1,59 @@
-/* Remove border under the header when the address bar isn't on top */
-#browser:not(.address-top) > #header {
-  box-shadow: none !important;
+body[data-browser="brave"] .brave-header {
+  position: relative;
+  height: var(--braveGXToolbarHeight);
+  display: grid;
+  grid-template-columns: var(--braveGXSidebarWidth) 1fr auto;
+  align-items: center;
+  padding-inline: 8px;
+  border-bottom: 1px solid var(--braveGXBorderColor);
 }
 
-/* Give gradient bottom border if all other toolbars are hidden */
-#browser.address-top-off.tabs-off #header::after {
+body[data-browser="brave"] .brave-header::after {
   content: "";
   position: absolute;
-  bottom: 0;
-  left: var(--arePanelsSetToRight, var(--GXpanelWidth));
-  right: var(--arePanelsSetToLeft, var(--GXpanelWidth));
-  width: 100%;
+  inset-inline-start: calc(var(--braveGXSidebarLeft) * var(--braveGXSidebarWidth));
+  inset-inline-end: calc(var(--braveGXSidebarRight) * var(--braveGXSidebarWidth));
+  inset-block-end: -1px;
   height: 1px;
-  background-image: var(--arePanelsSetToRight, linear-gradient(to right, var(--GXborderColor), transparent));
-}
-#browser.address-top-off.tabs-off:has(#panels-container.right) #header::after {
-  background-image: var(--arePanelsSetToLeft, linear-gradient(to left, var(--GXborderColor), transparent));
-}
-#browser.address-top-off.tabs-off:has(#panels-container[style*="width: 0px;"]) #header::after {
-  left: var(--arePanelsSetToRight, 0);
-  right: var(--arePanelsSetToLeft, 0);
-}
-
-/* Make the title bar transparent/blurred if all the other bars are hidden */
-#browser.address-top-off.tabs-off #header {
-  backdrop-filter: var(--backgroundBlur);
-  background-color: var(--colorBgAlphaBlur) !important;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--braveGXBorderColor) 20%,
+    transparent 80%
+  );
+  pointer-events: none;
 }
 
-/* Make the menu/title look more inline */
-#browser.win #titlebar #pagetitle {
-  padding-left: var(--GXpanelWidth);
+body[data-browser="brave"] .brave-header .window-title {
+  font-weight: 500;
+  letter-spacing: 0.015em;
+  padding-inline-start: 12px;
+  color: var(--colorFgIntense);
 }
-#browser:not(.tabs-top) .vivaldi {
-  width: var(--GXpanelWidth);
+
+body[data-browser="brave"] .brave-header .window-controls {
+  display: inline-flex;
+  gap: 4px;
+  padding-inline: 6px;
+}
+
+body[data-browser="brave"][data-sidebar-position="left"] .brave-header {
+  padding-inline-start: 0;
+}
+
+body[data-browser="brave"][data-sidebar-position="right"] .brave-header {
+  padding-inline-end: 0;
+}
+
+body[data-browser="brave"][data-sidebar-visible="false"] .brave-header {
+  grid-template-columns: auto 1fr auto;
+}
+
+body[data-browser="brave"] .brave-header .window-drag-region {
+  -webkit-app-region: drag;
+  height: 100%;
+}
+
+body[data-browser="brave"] .brave-header .window-controls button {
+  -webkit-app-region: no-drag;
 }

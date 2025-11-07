@@ -1,114 +1,113 @@
-/* Stylize popup dialogs */
-.button-popup:not(:has(.SearchField)),
-.BookmarkPopup,
-.account-dialog,
-.ControlPanel {
-  background-color: var(--colorAccentBgDark);
+body[data-browser="brave"] .brave-modal,
+body[data-browser="brave"] .brave-dialog,
+body[data-browser="brave"] .brave-sheet {
+  background: color-mix(in srgb, var(--colorAccentBg) 82%, transparent);
+  color: var(--colorAccentFg);
+  border-radius: var(--braveGXCornerRadius);
+  border: 1px solid var(--braveGXBorderColor);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+body[data-browser="brave"] .brave-modal header,
+body[data-browser="brave"] .brave-dialog header,
+body[data-browser="brave"] .brave-sheet header {
+  padding: 16px;
+  font-weight: 600;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--braveGXBorderColor) 35%, transparent),
+    transparent 65%
+  );
+  border-bottom: 1px solid color-mix(in srgb, var(--braveGXBorderColor) 70%, transparent);
+}
+
+body[data-browser="brave"] .brave-modal footer,
+body[data-browser="brave"] .brave-dialog footer,
+body[data-browser="brave"] .brave-sheet footer {
+  padding: 12px 16px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background: color-mix(in srgb, var(--colorAccentBgDark) 70%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--braveGXBorderColor) 70%, transparent);
+}
+
+body[data-browser="brave"] .brave-modal .modal-body,
+body[data-browser="brave"] .brave-dialog .dialog-body,
+body[data-browser="brave"] .brave-sheet .sheet-body {
+  padding: 20px;
+  display: grid;
+  gap: 14px;
+}
+
+body[data-browser="brave"] .brave-modal button,
+body[data-browser="brave"] .brave-dialog button,
+body[data-browser="brave"] .brave-sheet button,
+body[data-browser="brave"] .brave-modal input,
+body[data-browser="brave"] .brave-dialog input,
+body[data-browser="brave"] .brave-sheet input,
+body[data-browser="brave"] .brave-modal textarea,
+body[data-browser="brave"] .brave-dialog textarea,
+body[data-browser="brave"] .brave-sheet textarea {
+  background: color-mix(in srgb, var(--colorAccentBgDarker) 70%, transparent);
+  border-radius: var(--braveGXCornerRadiusTight);
+  border: 1px solid color-mix(in srgb, var(--braveGXBorderColor) 65%, transparent);
   color: var(--colorAccentFg);
 }
-.button-popup:not(:has(.SearchField)):not(:has(.downloads)) header,
-.button-popup:not(:has(.SearchField)) footer,
-.BookmarkPopup .dialog-header,
-.BookmarkPopup .dialog-footer,
-.ClockPopup-Header,
-.ClockPopup .toolbar,
-.ClockPopup-Alarms,
-.ClockPopup-Countdowns,
-.button-popup:not(:has(.SearchField)).ToolbarButtonPopup-DefaultStyles h2,
-.button-popup:not(:has(.SearchField)).ToolbarButtonPopup-DefaultStyles footer {
-  background: var(--colorAccentBgDarker);
-}
-/* removes vertical border in screen capture popup */
-.ControlPanel-ModeSelector::after {
-  content: unset;
-}
-/* QR code dialog can be too tall for complex URLs */
-.button-popup:not(:has(.SearchField)) {
-  max-height: 70vh;
+
+body[data-browser="brave"] .brave-modal button:hover,
+body[data-browser="brave"] .brave-dialog button:hover,
+body[data-browser="brave"] .brave-sheet button:hover {
+  background: color-mix(in srgb, var(--colorAccentBg) 60%, transparent);
 }
 
-/* Buttons */
-.button-popup:not(:has(.SearchField)) input,
-.button-popup:not(:has(.SearchField)) button:not(.SlideBar),
-.button-popup:not(:has(.SearchField)) textarea {
-  background-color: var(--colorAccentBgDarker) !important;
-  border-color: var(--colorAccentBg) !important;
-  color: var(--colorAccentFgFaded) !important;
-}
-.button-popup:has(.account-dialog) button {
-  border-color: transparent !important;
-  border-radius: unset;
-}
-/* Clock up/down arrows are drawn with a background image */
-.button-popup:not(:has(.SearchField)) input,
-.button-popup:not(:has(.SearchField)) button:not(.ClockPopup-Spinner--up):not(.ClockPopup-Spinner--down),
-.button-popup:not(:has(.SearchField)) textarea {
-  background-image: unset !important;
-}
-.ClockPopup-Spinner--up {
-  background-image: linear-gradient(55deg, transparent 53%, var(--colorAccentBgDarker) 55%), linear-gradient(125deg, var(--colorAccentBgDarker) 43%, transparent 45%),
-    linear-gradient(var(--colorAccentFgFaded) 70%, var(--colorAccentBgDarker) 70%);
-}
-.ClockPopup-Spinner--down {
-  background-image: linear-gradient(55deg, var(--colorAccentBgDarker) 43%, transparent 45%), linear-gradient(125deg, transparent 53%, var(--colorAccentBgDarker) 55%),
-    linear-gradient(180deg, var(--colorAccentBgDarker) 30%, var(--colorAccentFgFaded) 30%);
-}
-/* Let submit buttons be more colorful */
-.button-popup:not(:has(.SearchField)) input[type="submit"],
-#modal-bg input[type="submit"] {
-  background-image: unset !important;
-  color: var(--colorHighlightBg) !important;
-  border-color: var(--colorHighlightBgDark) !important;
-}
-.button-popup:not(:has(.SearchField)) input[type="submit"]:hover,
-#modal-bg input[type="submit"]:hover {
-  background-color: var(--colorHighlightBgDark) !important;
-  color: var(--colorHighlightFg) !important;
+body[data-browser="brave"] .brave-modal button.primary,
+body[data-browser="brave"] .brave-dialog button.primary,
+body[data-browser="brave"] .brave-sheet button.primary {
+  background: var(--colorHighlightBg);
+  border-color: var(--colorHighlightBgDark);
+  color: var(--colorHighlightFg);
 }
 
-/* Make the bookmark details blend with background */
-.button-popup:not(:has(.SearchField)) .BookmarkInputField input {
-  background-color: unset !important;
+body[data-browser="brave"] .brave-modal button.primary:hover,
+body[data-browser="brave"] .brave-dialog button.primary:hover,
+body[data-browser="brave"] .brave-sheet button.primary:hover {
+  background: var(--colorHighlightBgDark);
 }
 
-/* Hovered Buttons */
-.button-popup:not(:has(.SearchField)) input:hover,
-.button-popup:not(:has(.SearchField)) button:hover,
-.button-popup:not(:has(.SearchField)) textarea:hover {
-  background-color: var(--colorAccentBg) !important;
-  color: var(--colorAccentFg) !important;
-}
-.ClockPopup-Spinner--up:hover {
-  background-image: linear-gradient(55deg, transparent 53%, var(--colorAccentBg) 55%), linear-gradient(125deg, var(--colorAccentBg) 43%, transparent 45%),
-    linear-gradient(var(--colorAccentFg) 70%, var(--colorAccentBg) 70%);
-}
-.ClockPopup-Spinner--down:hover {
-  background-image: linear-gradient(55deg, var(--colorAccentBg) 43%, transparent 45%), linear-gradient(125deg, transparent 53%, var(--colorAccentBg) 55%),
-    linear-gradient(180deg, var(--colorAccentBg) 30%, var(--colorAccentFg) 30%);
+body[data-browser="brave"] .brave-modal input:focus,
+body[data-browser="brave"] .brave-dialog input:focus,
+body[data-browser="brave"] .brave-sheet input:focus,
+body[data-browser="brave"] .brave-modal textarea:focus,
+body[data-browser="brave"] .brave-dialog textarea:focus,
+body[data-browser="brave"] .brave-sheet textarea:focus {
+  outline: 2px solid color-mix(in srgb, var(--colorHighlightBg) 45%, transparent);
+  outline-offset: 0;
 }
 
-/* Buttons with focus */
-.button-popup:not(:has(.SearchField)) input:focus-within,
-.button-popup:not(:has(.SearchField)) button:focus-within,
-.button-popup:not(:has(.SearchField)) textarea:focus-within {
-  background-color: var(--colorAccentBgDark) !important;
-  color: var(--colorAccentFg) !important;
-  box-shadow: 0 0 0 1px var(--colorAccentBg) !important;
-}
-.ClockPopup-Spinner--up:focus-within {
-  background-image: linear-gradient(55deg, transparent 53%, var(--colorAccentBgDark) 55%), linear-gradient(125deg, var(--colorAccentBgDark) 43%, transparent 45%),
-    linear-gradient(var(--colorAccentFg) 70%, var(--colorAccentBgDark) 70%);
-}
-.ClockPopup-Spinner--down:focus-within {
-  background-image: linear-gradient(55deg, var(--colorAccentBgDark) 43%, transparent 45%), linear-gradient(125deg, transparent 53%, var(--colorAccentBgDark) 55%),
-    linear-gradient(180deg, var(--colorAccentBgDark) 30%, var(--colorAccentFg) 30%);
+body[data-browser="brave"] .brave-modal .toggle-group label,
+body[data-browser="brave"] .brave-dialog .toggle-group label,
+body[data-browser="brave"] .brave-sheet .toggle-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: var(--braveGXCornerRadiusTight);
+  background: color-mix(in srgb, var(--colorAccentBg) 55%, transparent);
 }
 
-/* Make checked checkboxes more visible again */
-.button-popup:not(:has(.SearchField)) input[type="checkbox"]:checked {
-  background-color: var(--colorHighlightBg) !important;
+body[data-browser="brave"] .brave-modal .toggle-group input:checked + label,
+body[data-browser="brave"] .brave-dialog .toggle-group input:checked + label,
+body[data-browser="brave"] .brave-sheet .toggle-group input:checked + label {
+  background: color-mix(in srgb, var(--colorHighlightBg) 40%, transparent);
+  color: var(--colorHighlightFg);
 }
-.button-popup:not(:has(.SearchField)) input[type="radio"]:checked,
-.button-popup:not(:has(.SearchField)) input[type="checkbox"]:checked {
-  border-color: var(--colorHighlightBg) !important;
+
+body[data-browser="brave"] .brave-modal .scroll-region,
+body[data-browser="brave"] .brave-dialog .scroll-region,
+body[data-browser="brave"] .brave-sheet .scroll-region {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-inline-end: 6px;
 }

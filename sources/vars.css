@@ -1,14 +1,35 @@
-#browser {
-  --GXbuttonFill: var(--colorHighlightBg);
-  --GXbuttonBgHover: var(--colorAccentBgDark);
-  --GXborderColor: var(--colorHighlightBgDark);
-  /* Minimum width allowed is 34px */
-  --GXpanelWidth: 40px;
-  --GXaddressFieldSideBorders: "⋮";
-  /* Set the 2 variables below to "var(--colorAccentFg)" to get the original look of Opera GX */
-  /* By default, "var(--GXbuttonFill)", the buttons will match the rest of the UI */
-  --GXaddressBarButtonFill: var(--GXbuttonFill);
-  --GXbookmarkBarButtonFill: var(--GXbuttonFill);
-  /* Set the variable below to "transparent" to get the original look of Opera GX */
-  --GXspeedDialSearchBgColor: transparent;
+:root,
+body[data-browser="brave"] {
+  --braveGXButtonFill: var(--colorToolbarButtonFg, #f4f6ff);
+  --braveGXButtonBgHover: color-mix(in srgb, var(--braveGXButtonFill) 16%, transparent);
+  --braveGXBorderColor: color-mix(in srgb, var(--colorAccentBg) 72%, transparent);
+  --braveGXSidebarWidth: 46px;
+  --braveGXAddressBarButtonFill: var(--braveGXButtonFill);
+  --braveGXBookmarkBarButtonFill: var(--braveGXButtonFill);
+  --braveGXSpeedDialSearchBgColor: color-mix(in srgb, var(--colorAccentBg) 65%, transparent);
+  --braveGXCornerRadius: 12px;
+  --braveGXCornerRadiusTight: 8px;
+  --braveGXBadgeRadius: 7px;
+  --braveGXToolbarHeight: 36px;
+  --braveGXStatusbarHeight: 28px;
+  --braveGXSidebarLeft: 0;
+  --braveGXSidebarRight: 0;
+  --braveGXAddressFieldSideGlyph: "⋮";
+  --braveGXShieldsAccent: color-mix(in srgb, var(--colorHighlightBg) 75%, transparent);
+  --braveGXPlaylistAccent: color-mix(in srgb, var(--colorAccentBg) 50%, black 12%);
+}
+
+body[data-browser="brave"][data-sidebar-position="left"] {
+  --braveGXSidebarLeft: 1;
+  --braveGXSidebarRight: 0;
+}
+
+body[data-browser="brave"][data-sidebar-position="right"] {
+  --braveGXSidebarLeft: 0;
+  --braveGXSidebarRight: 1;
+}
+
+body[data-browser="brave"][data-sidebar-visible="false"] {
+  --braveGXSidebarLeft: 0;
+  --braveGXSidebarRight: 0;
 }

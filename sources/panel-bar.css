@@ -1,95 +1,99 @@
-/* Set the panel bar width */
-#panels-container:not(:fullscreen):not([style*="width: 0px;"]) {
-  min-width: calc(var(--GXpanelWidth) + 1px) !important;
-}
-#panels-container:not([style*="width: 0px;"]) {
-  min-width: var(--GXpanelWidth) !important;
-}
-/* Move panel pane over to accomidate new width when set to floating */
-#panels-container.overlay .panel-group {
-  left: var(--GXpanelWidth) !important;
-}
-
-/* Make panel buttons fill available space */
-#switch {
-  flex: 0 0 var(--GXpanelWidth);
-  max-width: 100%;
-}
-#switch > * > .button-toolbar {
-  width: var(--GXpanelWidth);
-}
-
-/* Keep the side border indicator for active panel button while hovered */
-#switch .button-toolbar.active:has(> button:hover) {
-  background-color: var(--GXbuttonBgHover);
-}
-#switch .button-toolbar.active > button:hover {
-  background-color: transparent !important;
-}
-
-/* Add gradient border along side of panels */
-#panels-container {
-  --GXborderGradient: linear-gradient(var(--GXborderColor) 25%, var(--colorWindowBg) 85%) 1;
-  border-image: var(--GXborderGradient);
-}
-
-/* Wrap border around expanded panels */
-/* 35px is width of visible but collapsed panel bar */
-#panels-container:not([style*="width: 35px;"]) .panel-group {
-  border-image: var(--GXborderGradient);
-}
-#panels-container:not([style*="width: 35px;"]) .panel-group::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  height: 1px;
-  background-color: var(--GXborderColor);
-  top: 0;
-}
-
-/* Add slight margin at the bottom of the panel bar */
-#panels #switch {
-  margin-bottom: 12px;
-}
-
-/* Hide background to allow replacement background to show */
-#panels-container {
-  background-color: transparent;
-}
-/* Re-add the background to the expanded panel */
-.panel-group {
-  background-color: var(--colorBgAlphaBlur);
-}
-
-/* Hide default background of buttons on hovered panel buttons */
-#switch .addwebpanel-wrapper > button:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):hover,
-#switch > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):hover,
-#switch > * > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):hover,
-#switch > button:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):hover,
-#switch .addwebpanel-wrapper > button:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):active,
-#switch > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):active,
-#switch > * > .button-toolbar:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):active,
-#switch > button:not(.toolbar-spacer, .toolbar-spacer-flexible, .divider):active {
-  background-color: unset;
-}
-
-/* Add border under panel headers */
-.panel > header h1 {
+body[data-browser="brave"] .brave-sidebar {
   position: relative;
-  margin: 0 auto 15px 0;
-}
-.panel > header h1::after {
-  content: "";
-  position: absolute;
-  left: -2px;
-  bottom: -6px;
-  width: 80%;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--GXborderColor) 2px, transparent);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding-block: 10px;
+  gap: 8px;
+  border-inline-end: calc(var(--braveGXSidebarLeft) * 1px) solid var(--braveGXBorderColor);
+  border-inline-start: calc(var(--braveGXSidebarRight) * 1px) solid var(--braveGXBorderColor);
 }
 
-/* Center download progress indicator */
-#panels-container .button-toolbar div.progress {
-  left: unset;
+body[data-browser="brave"] .brave-sidebar[data-position="right"] {
+  align-items: flex-start;
+}
+
+body[data-browser="brave"] .brave-sidebar[data-position="left"] {
+  align-items: flex-end;
+}
+
+body[data-browser="brave"] .brave-sidebar button {
+  position: relative;
+  width: var(--braveGXSidebarWidth);
+  height: 44px;
+  border-radius: var(--braveGXCornerRadius);
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+}
+
+body[data-browser="brave"] .brave-sidebar button::after {
+  content: "";
+  position: absolute;
+  inset-block: 10px;
+  inset-inline-start: calc(var(--braveGXSidebarLeft) * 0px);
+  inset-inline-end: calc(var(--braveGXSidebarRight) * 0px);
+  width: 4px;
+  border-radius: 999px;
+  background: transparent;
+  transition: background 0.2s ease-out;
+}
+
+body[data-browser="brave"] .brave-sidebar button[data-selected="true"]::after,
+body[data-browser="brave"] .brave-sidebar button:focus-visible::after {
+  background: linear-gradient(
+    to right,
+    var(--braveGXBorderColor),
+    color-mix(in srgb, var(--braveGXBorderColor) 25%, transparent)
+  );
+}
+
+body[data-browser="brave"] .brave-sidebar button[data-selected="true"] {
+  background: color-mix(in srgb, var(--braveGXBorderColor) 22%, transparent);
+}
+
+body[data-browser="brave"] .brave-sidebar button:hover {
+  background: var(--braveGXButtonBgHover);
+}
+
+body[data-browser="brave"] .brave-sidebar .brave-sidebar-pane {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: calc(var(--braveGXSidebarLeft) * var(--braveGXSidebarWidth));
+  inset-inline-end: calc(var(--braveGXSidebarRight) * var(--braveGXSidebarWidth));
+  width: clamp(280px, 25vw, 360px);
+  background: color-mix(in srgb, var(--colorBg) 82%, transparent);
+  border: 1px solid var(--braveGXBorderColor);
+  border-radius: var(--braveGXCornerRadius) 0 0 var(--braveGXCornerRadius);
+  overflow: hidden;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  z-index: 20;
+}
+
+body[data-browser="brave"] .brave-sidebar .brave-sidebar-pane[data-position="right"] {
+  border-radius: 0 var(--braveGXCornerRadius) var(--braveGXCornerRadius) 0;
+}
+
+body[data-browser="brave"] .brave-sidebar .brave-sidebar-pane header {
+  padding: 12px 16px;
+  font-weight: 600;
+  border-bottom: 1px solid color-mix(in srgb, var(--braveGXBorderColor) 60%, transparent);
+}
+
+body[data-browser="brave"] .brave-sidebar .brave-sidebar-pane .sidebar-content {
+  padding: 12px 16px 16px;
+  overflow-y: auto;
+  height: 100%;
+}
+
+body[data-browser="brave"] .brave-sidebar .progress-indicator {
+  position: absolute;
+  inset-inline-start: 50%;
+  translate: -50% 0;
+  inset-block-end: 16px;
+  width: 60%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--colorHighlightBg), transparent);
 }

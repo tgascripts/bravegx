@@ -1,66 +1,88 @@
-/* Remove border */
-.bookmark-bar {
-  border: unset;
+body[data-browser="brave"] .brave-bookmark-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  margin-inline: calc(var(--braveGXSidebarLeft) * (var(--braveGXSidebarWidth) - 4px)) calc(var(--braveGXSidebarRight) * (var(--braveGXSidebarWidth) - 4px));
+  border-bottom: 1px solid color-mix(in srgb, var(--braveGXBorderColor) 60%, transparent);
+  background: color-mix(in srgb, var(--colorAccentBg) 48%, transparent);
 }
 
-/* Leave space for continued panel bar when it is shown */
-#browser:has(#panels-container:not([style*="width: 0px;"])) .bookmark-bar {
-  margin-left: calc(var(--arePanelsSetToLeft, 0) * var(--GXpanelWidth));
-  margin-right: calc(var(--arePanelsSetToRight, 0) * var(--GXpanelWidth));
-}
-
-/* Border next to continued panel bar if the bookmark bar is set to the top */
-#browser.bookmark-bar-top:has(#panels-container:not([style*="width: 0px;"])) .bookmark-bar {
-  border-left: var(--arePanelsSetToRight, 1px solid var(--GXborderColor)) !important;
-  border-right: var(--arePanelsSetToLeft, 1px solid var(--GXborderColor)) !important;
-}
-
-/* Stylize the buttons */
-.bookmark-bar button {
-  border-radius: var(--radius);
-  padding: 0px 5px;
-}
-/* used for padding next to favicon */
-.bookmark-bar button:not(.chevron):before {
-  content: unset;
-}
-
-/* Space out the bookmarks a bit more */
-.bookmark-bar .observer {
-  padding-inline: 5px;
-}
-.bookmark-bar button:not(.chevron) {
-  margin-left: 2px;
-}
-/* Bring the more bookmarks chevron button out of flow so it doesn't get pushed off edge of screen */
-.bookmark-bar button.chevron {
+body[data-browser="brave"] .brave-bookmark-bar::before {
+  content: "";
   position: absolute;
-  right: 0;
+  inset-block-start: 0;
+  inset-inline: 0;
   height: 100%;
-  background-image: linear-gradient(to right, transparent, var(--colorAccentBg) 20%);
-  background-color: unset !important;
-}
-.color-behind-tabs-on .bookmark-bar button.chevron {
-  background-image: linear-gradient(to right, transparent, var(--colorBg) 20%);
-}
-.bookmark-bar button.chevron:hover {
-  background-color: unset !important;
-  background-image: linear-gradient(to right, transparent, var(--GXbuttonBgHover) 20%);
-}
-
-/* Change the hover affect to match other buttons */
-.bookmarkbarItem:hover {
-  background-color: var(--GXbuttonBgHover) !important;
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, var(--braveGXBorderColor) 12%, transparent),
+    transparent 12%,
+    transparent 88%,
+    color-mix(in srgb, var(--braveGXBorderColor) 12%, transparent)
+  );
+  pointer-events: none;
+  opacity: 0.35;
 }
 
-/* No side margin if tabs aren't set to the top */
-#browser:not(.tabs-top):has(#panels-container:not([style*="width: 0px;"])) {
-  & .bookmark-bar {
-    margin-left: unset;
-    margin-right: unset;
-  }
-  &.bookmark-bar-top .bookmark-bar {
-    border-left: unset !important;
-    border-right: unset !important;
-  }
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: var(--braveGXCornerRadiusTight);
+  color: var(--braveGXBookmarkBarButtonFill);
+  font-size: 13px;
+  text-decoration: none;
+  transition: background-color 0.15s ease-out;
+}
+
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-item svg,
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-item img {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-item:hover {
+  background-color: var(--braveGXButtonBgHover);
+}
+
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-item[data-active="true"] {
+  background-color: color-mix(in srgb, var(--braveGXBorderColor) 45%, transparent);
+}
+
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-item[data-folder="true"]::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 6px;
+  inset-block-end: 4px;
+  width: 8px;
+  height: 2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--braveGXBorderColor) 65%, transparent);
+}
+
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-chevron {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px;
+  border-radius: var(--braveGXCornerRadiusTight);
+  background: linear-gradient(to right, transparent, color-mix(in srgb, var(--braveGXBorderColor) 25%, transparent));
+}
+
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-chevron:hover {
+  background: linear-gradient(to right, transparent, var(--braveGXButtonBgHover));
+}
+
+body[data-browser="brave"] .brave-bookmark-bar .bookmark-scroll-shadow {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  width: 40px;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, color-mix(in srgb, var(--colorAccentBg) 60%, transparent));
 }

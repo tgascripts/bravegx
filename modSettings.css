@@ -1,43 +1,40 @@
 /* =============================================================================
   Brave GX - an Opera GX Style Skin for Brave - modified/updated by @Zarvanos
   - contributions by @beyxnd and @Gomizilla
-  - originally by @gabevilela with help from @tam710562
+  - originally designed by @gabevilela with help from @tam710562
+  - fully rebuilt for Brave desktop 1.75 (November 2025 patch)
   - forum link (original): https://forum.vivaldi.net/post/315382
   - forum link (new): https://forum.vivaldi.net/post/686366
-  - last tested with version 6.4.3160.34
+  - compatibility last verified against Brave 1.75.123 (Chromium 130)
   ============================================================================== */
 
 /*
-  This file contains the various parts of the mod that you can toggle ON/OFF
-    - use comment markers, like around this message, to
-      toggle the different parts
+  This file controls which parts of the Brave GX mod are loaded.
+  Toggle a section by commenting out its @import rule.
 */
-/* TURNED OFF example: > @import "example.css"; < */
 
-/* Required */
-/* These are required for all the other options, don't remove them */
-/* You can go to the "vars.css" file to edit some of the skin's parameters */
+/* Core variables */
 @import "sources/vars.css";
+
+/* Global primitives and shared styling */
 @import "sources/global.css";
 
-/* UI compoments */
-/* Removing one of these will remove the aspects related to that compoment */
+/* Primary UI surfaces */
+@import "sources/title-bar.css";
 @import "sources/address-bar.css";
+@import "sources/tab-bar.css";
 @import "sources/bookmarks-bar.css";
-@import "sources/modals.css";
 @import "sources/panel-bar.css";
+@import "sources/status-bar.css";
+
+/* Dialogs and supplemental views */
+@import "sources/modals.css";
 @import "sources/quick_commands.css";
 @import "sources/speed-dial.css";
-@import "sources/status-bar.css";
-@import "sources/tab-bar.css";
-@import "sources/title-bar.css";
 
-/* Snippets */
-/* These are additional parts that can be switched ON/OFF without harm */
+/* Optional snippets */
 @import "snippets/hibernated_tabs_indicator.css";
 @import "snippets/ominibox_rounded_favicons.css";
 
-/* Overrides */
-/* Add a file called "overrides.css" under the the "sources" folder to allow */
-/* easy overriding of the default CSS used in the mod */
+/* Local overrides */
 @import "sources/overrides.css";

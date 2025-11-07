@@ -1,0 +1,66 @@
+/* Remove border */
+.bookmark-bar {
+  border: unset;
+}
+
+/* Leave space for continued panel bar when it is shown */
+#browser:has(#panels-container:not([style*="width: 0px;"])) .bookmark-bar {
+  margin-left: calc(var(--arePanelsSetToLeft, 0) * var(--GXpanelWidth));
+  margin-right: calc(var(--arePanelsSetToRight, 0) * var(--GXpanelWidth));
+}
+
+/* Border next to continued panel bar if the bookmark bar is set to the top */
+#browser.bookmark-bar-top:has(#panels-container:not([style*="width: 0px;"])) .bookmark-bar {
+  border-left: var(--arePanelsSetToRight, 1px solid var(--GXborderColor)) !important;
+  border-right: var(--arePanelsSetToLeft, 1px solid var(--GXborderColor)) !important;
+}
+
+/* Stylize the buttons */
+.bookmark-bar button {
+  border-radius: var(--radius);
+  padding: 0px 5px;
+}
+/* used for padding next to favicon */
+.bookmark-bar button:not(.chevron):before {
+  content: unset;
+}
+
+/* Space out the bookmarks a bit more */
+.bookmark-bar .observer {
+  padding-inline: 5px;
+}
+.bookmark-bar button:not(.chevron) {
+  margin-left: 2px;
+}
+/* Bring the more bookmarks chevron button out of flow so it doesn't get pushed off edge of screen */
+.bookmark-bar button.chevron {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  background-image: linear-gradient(to right, transparent, var(--colorAccentBg) 20%);
+  background-color: unset !important;
+}
+.color-behind-tabs-on .bookmark-bar button.chevron {
+  background-image: linear-gradient(to right, transparent, var(--colorBg) 20%);
+}
+.bookmark-bar button.chevron:hover {
+  background-color: unset !important;
+  background-image: linear-gradient(to right, transparent, var(--GXbuttonBgHover) 20%);
+}
+
+/* Change the hover affect to match other buttons */
+.bookmarkbarItem:hover {
+  background-color: var(--GXbuttonBgHover) !important;
+}
+
+/* No side margin if tabs aren't set to the top */
+#browser:not(.tabs-top):has(#panels-container:not([style*="width: 0px;"])) {
+  & .bookmark-bar {
+    margin-left: unset;
+    margin-right: unset;
+  }
+  &.bookmark-bar-top .bookmark-bar {
+    border-left: unset !important;
+    border-right: unset !important;
+  }
+}

@@ -1,0 +1,14 @@
+#browser {
+  --GXbuttonFill: var(--colorHighlightBg);
+  --GXbuttonBgHover: var(--colorAccentBgDark);
+  --GXborderColor: var(--colorHighlightBgDark);
+  /* Minimum width allowed is 34px */
+  --GXpanelWidth: 40px;
+  --GXaddressFieldSideBorders: "⋮";
+  /* Set the 2 variables below to "var(--colorAccentFg)" to get the original look of Opera GX */
+  /* By default, "var(--GXbuttonFill)", the buttons will match the rest of the UI */
+  --GXaddressBarButtonFill: var(--GXbuttonFill);
+  --GXbookmarkBarButtonFill: var(--GXbuttonFill);
+  /* Set the variable below to "transparent" to get the original look of Opera GX */
+  --GXspeedDialSearchBgColor: transparent;
+}

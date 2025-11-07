@@ -1,0 +1,137 @@
+/* Stylize search box dropdowns */
+.SpeedDialView-SearchField .OmniDropdown,
+.sdwrapper .SearchField nav.menu {
+  top: 33px;
+  margin-top: 1px;
+  backdrop-filter: var(--backgroundBlur);
+  background-color: var(--colorBgAlphaBlur);
+  border-radius: 0 0 var(--radiusCap) var(--radiusCap);
+}
+.SpeedDialView-SearchField.SearchField nav.menu > ul {
+  background-color: unset;
+}
+/* When unfocused search should blend in with background */
+.sdwrapper .SpeedDialView-SearchField.SearchField {
+  background-color: unset;
+  border-radius: unset;
+  backdrop-filter: unset;
+  box-shadow: unset;
+}
+/* Change search text color to be visible on background */
+.sdwrapper .SpeedDialView-SearchField.SearchField {
+  color: var(--colorImageCenterFg);
+}
+/* Give the search input a background that doesn't interfere with the dropdown style */
+/* https://stackoverflow.com/a/76207141 */
+.sdwrapper .SpeedDialView-SearchField.SearchField:focus-within::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  backdrop-filter: var(--backgroundBlur);
+  background-color: var(--GXspeedDialSearchBgColor);
+  border-radius: var(--radius);
+  z-index: -1;
+}
+/* Remove default focus indication */
+.sdwrapper .SpeedDialView-SearchField.SearchField:focus-within {
+  box-shadow: unset;
+  outline: unset;
+}
+/* Add bar under search field that animates on focus */
+.SpeedDialView-SearchField .SearchEngineSelect-Icon::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  height: 2px;
+  width: calc(100% - 30px);
+  background-color: var(--GXborderColor);
+  opacity: 0.4;
+}
+.SpeedDialView-SearchField .SearchEngineSelect-Icon::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  height: 2px;
+  width: 0;
+  background-color: var(--GXborderColor);
+  transition: 0.3s ease-out;
+}
+.SpeedDialView-SearchField:focus-within .SearchEngineSelect-Icon::after {
+  width: calc(100% - 30px);
+}
+/* When the dropdown is present, make the bar extend the full width */
+.SpeedDialView-SearchField:has(.OmniDropdown) .SearchEngineSelect-Icon::after,
+.SpeedDialView-SearchField:has(nav.menu) .SearchEngineSelect-Icon::after {
+  left: 0;
+  width: 100%;
+}
+.sdwrapper .SpeedDialView-SearchField.SearchField:has(.OmniDropdown):focus-within::before,
+.sdwrapper .SpeedDialView-SearchField.SearchField:has(nav.menu):focus-within::before {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Stylize starpage navigation buttons */
+.startpage-navigation .button-toolbar button {
+  padding-right: 6px;
+}
+/* Hide fade on right of buttons */
+.button-startpage {
+  -webkit-mask-image: unset;
+}
+.button-startpage.button-toolbar {
+  padding-right: 3px;
+}
+.startpage .button-toolbar > button:hover {
+  background-color: unset !important;
+}
+.startpage .startpage-navigation .startpage-navigation-group .button-startpage:hover {
+  border-bottom: 2px solid var(--GXbuttonFill);
+}
+
+.speeddial .dial {
+  box-shadow: unset;
+}
+
+/* Cut dial corners */
+.dials.speeddial div.dial {
+  --modClipPath1: 12%;
+  --modClipPath2: 88%;
+  clip-path: polygon(var(--modClipPath1) 0, 100% 0, 100% var(--modClipPath2), var(--modClipPath2) 100%, 0 100%, 0 var(--modClipPath1));
+}
+/* Give consistent border along cut corners */
+.dials.speeddial div.dial.folder .Mini-Thumbnail:first-of-type {
+  clip-path: polygon(22.3% 0, 100% 0, 100% 100%, 0 100%, 0 28%);
+}
+.dials.speeddial div.dial .thumbnail-title {
+  clip-path: polygon(0 0, 100% 0, 100% 0%, 79% 100%, 0 100%);
+}
+/* Prevent title from going into cut area */
+.dials.speeddial div.dial .thumbnail-title button {
+  padding-right: 14px;
+}
+/* Fill top left corner for focus indicator */
+.dials.speeddial .dial:focus-visible::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(135deg, var(--colorHighlightBg) 9.6%, transparent 0);
+  pointer-events: none;
+}
+/* Folder needs border for bottom right cut corner */
+.dials.speeddial .dial:focus-visible::before {
+  background-image: linear-gradient(135deg, var(--colorHighlightBg) 9.6%, transparent 0, transparent 93.5%, var(--colorHighlightBg) 0);
+}
+.dials .dial .button-title {
+  color: var(--colorFgIntense);
+}
+.dials .dial:focus-within .editable-title-container .button-title {
+  color: var(--colorFgIntense) !important;
+}
